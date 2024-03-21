@@ -36,7 +36,7 @@ function SingleItem({ image, type, name, index }: SingleItemProps) {
                   </p>
                 </div>
                 <div className="clip-path">
-                  <p className="p-text font-medium text-9xl overflow-hidden">
+                  <p className="p-text font-medium text-8xl overflow-hidden">
                     {name}
                   </p>
                 </div>
