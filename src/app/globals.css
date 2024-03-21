@@ -46,7 +46,8 @@ body {
 }
 
 .title {
-  font-size: clamp(6rem, 22.65vw, 9.55rem);
+  font-size: clamp(6rem, 22vw, 9.25rem);
+  line-height: clamp(6rem, 20vw, 7.75rem);
 }
 
 .clip-path {
