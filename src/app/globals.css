@@ -40,6 +40,11 @@ body {
   }
 }
 
+::-webkit-scrollbar {
+  width: 0px;
+  background: transparent;
+}
+
 .title {
   font-size: clamp(6rem, 22.65vw, 9.55rem);
 }
