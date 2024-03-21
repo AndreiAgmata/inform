@@ -41,7 +41,7 @@ function Hero() {
   }, []);
 
   return (
-    <section className="hero container mx-auto flex flex-col items-center justify-start h-full pt-3 sm:pt-6 md:pt-9 lg:pt-8 xl:pt-5 2xl:pt-3">
+    <section className="hero container mx-auto flex flex-col items-center justify-start min-h-full pt-3 sm:pt-6 md:pt-9 lg:pt-8 xl:pt-5 2xl:pt-3">
       <div className="title px-6 mb-0 sm:mb-2">
         <h1
           className="font-semibold tracking-tighter 

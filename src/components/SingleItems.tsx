@@ -64,8 +64,8 @@ function SingleItems() {
         tl.to(".single-item .image-cover", {
           scaleY: 0,
           transformOrigin: "bottom",
-          duration: 2,
-          ease: "expo.inOut",
+          duration: 1,
+          ease: "expo.in",
         }).fromTo(
           ".single-item .product-info .p-text",
           { yPercent: -110 },
@@ -107,8 +107,8 @@ function SingleItems() {
         tl.to(".single-item .image-cover", {
           scaleY: 0,
           transformOrigin: "top",
-          duration: 2,
-          ease: "expo.inOut",
+          duration: 1,
+          ease: "expo.in",
         }).fromTo(
           ".single-item .product-info .p-text",
           { yPercent: 110 },
