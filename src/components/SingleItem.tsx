@@ -65,21 +65,45 @@ function SingleItem() {
   const changeSelectedImage = (imageSrc: string) => {
     const tl = gsap.timeline();
 
-    tl.to(".main-image-cover", {
-      scaleY: 1,
-      transformOrigin: "top",
-      duration: 1,
-      ease: "expo.out",
-    }).call(() => {
-      setSelectedImage(imageSrc);
-
-      tl.to(".main-image-cover", {
-        scaleY: 0,
-        transformOrigin: "top",
+    tl.to(
+      `.${selectedImage}`,
+      {
+        scaleX: 0,
+        transformOrigin: "left",
         duration: 1,
-        ease: "expo.inOut",
+        ease: "expo.out",
+      },
+      "start"
+    )
+      .to(
+        ".main-image-cover",
+        {
+          scaleY: 1,
+          transformOrigin: "top",
+          duration: 1,
+          ease: "expo.out",
+        },
+        "start"
+      )
+      .to(
+        `.${imageSrc}`,
+        {
+          scaleX: 1,
+          transformOrigin: "left",
+          duration: 1,
+          ease: "expo.out",
+        },
+        "start"
+      )
+      .call(() => {
+        setSelectedImage(imageSrc);
+        tl.to(".main-image-cover", {
+          scaleY: 0,
+          transformOrigin: "top",
+          duration: 1,
+          ease: "expo.inOut",
+        });
       });
-    });
   };
 
   useEffect(() => {
@@ -90,14 +114,24 @@ function SingleItem() {
       const transformOrigin = scrollDirection === "down" ? "top" : "bottom";
       const tl = gsap.timeline();
       tl.to(
-        ".single-item .product-info .p-text",
+        `.${selectedImage}`,
         {
-          yPercent: 110,
+          scaleX: 0,
+          transformOrigin: "left",
           duration: 1,
           ease: "expo.out",
         },
         "start"
       )
+        .to(
+          ".single-item .product-info .p-text",
+          {
+            yPercent: 110,
+            duration: 1,
+            ease: "expo.out",
+          },
+          "start"
+        )
         .to(
           ".single-item .image-cover",
           {
@@ -118,22 +152,32 @@ function SingleItem() {
             setSelectedImage(`${items[currIndex - 1].image}1`);
             setCurrIndex(currIndex - 1);
           }
-
           tl.to(".single-item .image-cover", {
             scaleY: 0,
             transformOrigin: transformOrigin,
             duration: 1,
             ease: "expo.in",
-          }).fromTo(
-            ".single-item .product-info .p-text",
-            { yPercent: 110 },
-            {
-              yPercent: 0,
-              duration: 1,
-              ease: "expo.inOut",
-            },
-            "<0.5"
-          );
+          })
+            .fromTo(
+              ".single-item .product-info .p-text",
+              { yPercent: 110 },
+              {
+                yPercent: 0,
+                duration: 1,
+                ease: "expo.inOut",
+              },
+              "<0.5"
+            )
+            .to(
+              `.${items[currIndex].image}1`,
+              {
+                scaleX: 1,
+                transformOrigin: "left",
+                duration: 1,
+                ease: "expo.out",
+              },
+              "<0.25"
+            );
         });
     };
 
@@ -162,7 +206,7 @@ function SingleItem() {
     });
 
     return () => ctx.revert();
-  }, [currIndex]);
+  }, [currIndex, selectedImage]);
 
   //startup animation
   useEffect(() => {
@@ -187,23 +231,35 @@ function SingleItem() {
           ease: "expo.in",
           delay: 0.5,
         }
-      ).fromTo(
-        ".single-item .product-info .p-text",
-        { yPercent: 110 },
-        {
-          yPercent: 0,
-          duration: 1,
-          ease: "expo.inOut",
-        },
-        "<0.5"
-      );
+      )
+        .fromTo(
+          ".single-item .product-info .p-text",
+          { yPercent: 110 },
+          {
+            yPercent: 0,
+            duration: 1,
+            ease: "expo.inOut",
+          },
+          "<0.5"
+        )
+        .fromTo(
+          ".select-indicator-1",
+          { scaleX: 0 },
+          {
+            scaleX: 1,
+            transformOrigin: "left",
+            duration: 1,
+            ease: "expo.out",
+          },
+          "<0.5"
+        );
     });
 
     return () => ctx.revert();
   }, []);
 
   return (
-    <section className="single-item container mx-auto px-6 pb-6 h-screen text-zinc-950 w-full overflow-hidden">
+    <section className="single-item container mx-auto px-6 pb-6 h-screen text-zinc-950 w-full overflow-hidden relative z-40">
       <div className="inner w-full h-full bg-neutral-50 pt-16 px-6 pb-6 flex flex-col items-center justify-center">
         <div className="content flex flex-col lg:grid lg:grid-cols-2 flex-grow w-full gap-5">
           <div
@@ -250,6 +306,9 @@ function SingleItem() {
                   className="object-cover"
                   sizes="100%"
                 />
+                <div
+                  className={`select-indicator-1 ${currItem.image}1 absolute bottom-0 left-0 w-full h-[3px] bg-gray-700 scale-x-0`}
+                ></div>
               </div>
               <div
                 className="image-wrapper w-24 h-auto aspect-[1/1.3125] relative overflow-hidden cursor-pointer"
@@ -266,6 +325,9 @@ function SingleItem() {
                   className="object-cover"
                   sizes="100%"
                 />
+                <div
+                  className={`select-indicator-2 ${currItem.image}2 absolute bottom-0 left-0 w-full h-[3px] bg-gray-700 scale-x-0`}
+                ></div>
               </div>
               <div
                 className="image-wrapper w-24 h-auto aspect-[1/1.3125] relative overflow-hidden cursor-pointer"
@@ -282,6 +344,9 @@ function SingleItem() {
                   className="object-cover"
                   sizes="100%"
                 />
+                <div
+                  className={`select-indicator-3 ${currItem.image}3 absolute bottom-0 left-0 w-full h-[3px] bg-gray-700 scale-x-0`}
+                ></div>
               </div>
             </div>
           </div>
