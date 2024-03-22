@@ -62,7 +62,7 @@ function Vision() {
 
   useEffect(() => {}, []);
   return (
-    <section className="vision container mx-auto px-6 text-zinc-950 w-full h-screen">
+    <section className="vision container mx-auto px-6 text-zinc-950 w-full h-screen relative z-10">
       <div className="content h-full bg-neutral-50 p-5 flex flex-col items-start justify-end">
         <div className="featured h-full w-full text-zinc-950 mt-6">
           <div className="inner h-full w-full bg-neutral-50 flex flex-col items-start justify-start">
