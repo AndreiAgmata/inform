@@ -152,52 +152,10 @@ function SingleItems() {
     });
   }, []);
 
-  useEffect(() => {
-    gsap.registerPlugin(ScrollTrigger);
-    const ctx = gsap.context(() => {
-      const tl = gsap.timeline({
-        scrollTrigger: {
-          trigger: ".single-items",
-          start: "top center+=200",
-          // markers: true,
-          // toggleActions: "play none none reverse",
-        },
-      });
-
-      tl.fromTo(
-        ".single-item .image-cover",
-        { scaleY: 1 },
-        {
-          scaleY: 0,
-          transformOrigin: "bottom",
-          duration: 1,
-          ease: "expo.in",
-          delay: 0.5,
-        }
-      ).fromTo(
-        ".single-item .product-info .p-text",
-        { yPercent: -110 },
-        {
-          yPercent: 0,
-          duration: 1,
-          ease: "expo.inOut",
-        },
-        "<0.5"
-      );
-    });
-
-    return () => ctx.revert();
-  }, []);
+  //startup animation
 
   return (
-    <div className="single-items bottom-0 h-screen w-full overflow-hidden grid grid-cols-1">
-      <SingleItem
-        image={currentItem.image}
-        type={currentItem.type}
-        name={currentItem.name}
-        index={currentItem.index}
-      />
-    </div>
+    <div className="single-items bottom-0 h-screen w-full overflow-hidden grid grid-cols-1"></div>
   );
 }
 

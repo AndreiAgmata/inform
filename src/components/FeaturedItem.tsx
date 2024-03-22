@@ -18,7 +18,7 @@ function FeaturedItem({ image, type, name }: FeaturedItemProps) {
           src={image}
           alt="swivel chair"
           fill
-          sizes="100vw"
+          sizes="100%"
           className="object-cover md:object-contain xl:object-cover"
         />
       </div>

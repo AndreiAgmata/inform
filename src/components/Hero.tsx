@@ -24,7 +24,6 @@ function Hero() {
         });
       },
       onDown: () => {
-        console.log("down");
         const visionElement = document.querySelector(".vision");
         if (visionElement) {
           const visionBottom = visionElement.getBoundingClientRect().bottom;

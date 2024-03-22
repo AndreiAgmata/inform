@@ -27,7 +27,7 @@ function Vision() {
         gsap.to(window, {
           duration: 1,
           ease: "power3.inOut",
-          scrollTo: ".single-items",
+          scrollTo: ".single-item",
         }),
     });
   }, []);
