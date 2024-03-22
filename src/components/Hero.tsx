@@ -56,9 +56,16 @@ function Hero() {
           "<0.15"
         )
         .fromTo(
-          ".featured",
-          { yPercent: 110 },
-          { yPercent: 0, duration: 1, ease: "expo.out" }
+          ".featured-hero .inner",
+          { yPercent: 100 },
+          { yPercent: 0, duration: 2, ease: "expo.out" },
+          "<0.5"
+        )
+        .fromTo(
+          ".featured-hero .inner > *",
+          { yPercent: 100 },
+          { yPercent: 0, duration: 2, ease: "expo.out" },
+          "<0.15"
         );
     });
 
@@ -66,7 +73,7 @@ function Hero() {
   }, []);
 
   return (
-    <section className="hero container mx-auto flex flex-col items-center justify-start min-h-screen pt-9 sm:pt-10 lg:pt-9 xl:pt-7 2xl:pt-5 border-b-2 border-green-500">
+    <section className="hero container mx-auto flex flex-col items-center justify-start min-h-screen pt-9 sm:pt-10 lg:t-9 xl:pt-7 2xl:pt-5 ">
       <div
         className="title w-full px-6 mb-0 sm:mb-2 
       font-semibold italic overflow-hidden flex flex-row items-between justify-between
@@ -81,31 +88,35 @@ function Hero() {
         <p className="title-letter">R</p>
         <p className="title-letter">M</p>
       </div>
-      <div className="featured flex-grow w-full px-6 text-zinc-950 flex">
+      <div className="featured-hero flex-grow w-full px-6 text-zinc-950 flex">
         <div className="inner flex-grow w-full bg-neutral-50 p-5 flex flex-col items-start justify-start">
-          <p className="text-sm tracking-wider font-medium">Mörk Kollektion</p>
-          <p className=" text-4xl font-medium">Featured</p>
-          <div className="featured-items w-full flex-grow grid grid-cols-2 xl:grid-cols-4 gap-4 mt-5">
-            <FeaturedItem
-              image="/images/chair/chair1.jpg"
-              type="Lounge Chair"
-              name="Fåtöl"
-            />
-            <FeaturedItem
-              image="/images/table/table1.jpg"
-              type="Center Table"
-              name="Mittbord"
-            />
-            <FeaturedItem
-              image="/images/lamp/lamp1.jpg"
-              type="Floor Lamp"
-              name="Lampara"
-            />
-            <FeaturedItem
-              image="/images/endTable/endTable1.jpg"
-              type="End Table"
-              name="Ändbord"
-            />
+          <div className="wrapper w-full">
+            <p className="text-sm tracking-wider font-medium">
+              Mörk Kollektion
+            </p>
+            <p className=" text-4xl font-medium">Featured</p>
+            <div className="featured-items w-full flex-grow grid grid-cols-2 xl:grid-cols-4 gap-4 mt-5">
+              <FeaturedItem
+                image="/images/chair/chair1.jpg"
+                type="Lounge Chair"
+                name="Fåtöl"
+              />
+              <FeaturedItem
+                image="/images/table/table1.jpg"
+                type="Center Table"
+                name="Mittbord"
+              />
+              <FeaturedItem
+                image="/images/lamp/lamp1.jpg"
+                type="Floor Lamp"
+                name="Lampara"
+              />
+              <FeaturedItem
+                image="/images/endTable/endTable1.jpg"
+                type="End Table"
+                name="Ändbord"
+              />
+            </div>
           </div>
         </div>
       </div>

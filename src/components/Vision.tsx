@@ -2,9 +2,11 @@
 import React, { useEffect } from "react";
 
 import gsap from "gsap";
+import ScrollTrigger from "gsap/ScrollTrigger";
 import { ScrollToPlugin } from "gsap/all";
 import { Observer } from "gsap/Observer";
 import FeaturedItem from "./FeaturedItem";
+import SplitType from "split-type";
 
 function Vision() {
   useEffect(() => {
@@ -29,6 +31,36 @@ function Vision() {
         }),
     });
   }, []);
+
+  useEffect(() => {
+    const text = new SplitType(".vision-text");
+    gsap.registerPlugin(ScrollTrigger);
+    const ctx = gsap.context(() => {
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: ".vision",
+          start: "top center+=200",
+          // markers: true,
+          // toggleActions: "play none none reverse",
+        },
+      });
+
+      tl.fromTo(
+        ".word",
+        { yPercent: 110 },
+        {
+          yPercent: 0,
+          duration: 1,
+          ease: "expo.out",
+          stagger: 0.15,
+          delay: 0.5,
+        }
+      );
+    });
+    return () => ctx.revert();
+  }, []);
+
+  useEffect(() => {}, []);
   return (
     <section className="vision container mx-auto px-6 text-zinc-950 w-full h-screen">
       <div className="content h-full bg-neutral-50 p-5 flex flex-col items-start justify-end">
@@ -59,9 +91,9 @@ function Vision() {
           </div>
         </div>
         <p className="text-lg tracking-wider font-medium">OUR VISION</p>
-        <p className="font-medium text-2xl sm:text-4xl lg:text-6xl xl:text-7xl sm:pe-24">
-          Sleek, timeless designs for sophisticated homes, elevating minimalist
-          living spaces.
+        <p className="vision-text font-medium text-2xl sm:text-4xl lg:text-6xl xl:text-7xl sm:pe-24">
+          Elegant, timeless pieces for refined residences, enhancing simple
+          living areas.
         </p>
       </div>
     </section>

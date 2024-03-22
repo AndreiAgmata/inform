@@ -2,6 +2,7 @@
 import React, { useEffect, useState } from "react";
 import SingleItem from "./SingleItem";
 import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { ScrollToPlugin } from "gsap/all";
 import { Observer } from "gsap/Observer";
 
@@ -10,25 +11,25 @@ const items = [
     image: "chair",
     type: "Lounge Chair",
     name: "Fåtöl",
-    index: "index-1",
+    index: 0,
   },
   {
     image: "table",
     type: "Center Table",
     name: "Mittbord",
-    index: "index-2",
+    index: 1,
   },
   {
     image: "lamp",
     type: "Floor Lamp",
     name: "Lampara",
-    index: "index-3",
+    index: 2,
   },
   {
     image: "endTable",
     type: "End Table",
     name: "Andbord",
-    index: "index-4",
+    index: 3,
   },
 ];
 
@@ -151,6 +152,43 @@ function SingleItems() {
     });
   }, []);
 
+  useEffect(() => {
+    gsap.registerPlugin(ScrollTrigger);
+    const ctx = gsap.context(() => {
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: ".single-items",
+          start: "top center+=200",
+          // markers: true,
+          // toggleActions: "play none none reverse",
+        },
+      });
+
+      tl.fromTo(
+        ".single-item .image-cover",
+        { scaleY: 1 },
+        {
+          scaleY: 0,
+          transformOrigin: "bottom",
+          duration: 1,
+          ease: "expo.in",
+          delay: 0.5,
+        }
+      ).fromTo(
+        ".single-item .product-info .p-text",
+        { yPercent: -110 },
+        {
+          yPercent: 0,
+          duration: 1,
+          ease: "expo.inOut",
+        },
+        "<0.5"
+      );
+    });
+
+    return () => ctx.revert();
+  }, []);
+
   return (
     <div className="single-items bottom-0 h-screen w-full overflow-hidden grid grid-cols-1">
       <SingleItem
@@ -164,24 +202,3 @@ function SingleItems() {
 }
 
 export default SingleItems;
-
-{
-  /* <SingleItem
-image="table"
-type="Center Table"
-name="Mittbord"
-index="index-2"
-/>
-<SingleItem
-image="lamp"
-type="Floor Lamp"
-name="Golvlampa"
-index="index-3"
-/>
-<SingleItem
-image="endTable"
-type="End Table"
-name="Ändbord"
-index="index-4"
-/> */
-}

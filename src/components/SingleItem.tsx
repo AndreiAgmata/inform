@@ -1,16 +1,38 @@
 "use client";
 import Image from "next/image";
-import React, { useEffect } from "react";
-import SplitType from "split-type";
+import React, { useEffect, useState } from "react";
+import gsap from "gsap";
 
 interface SingleItemProps {
   image: string;
   type: string;
   name: string;
-  index: string;
+  index: number;
 }
 
 function SingleItem({ image, type, name, index }: SingleItemProps) {
+  const [selectedImage, setSelectedImage] = useState(`${image}1`);
+
+  // const changeImage = (imageSrc: string) => {
+  //   const tl = gsap.timeline();
+
+  //   tl.to(".main-image-cover", {
+  //     scaleY: 1,
+  //     transformOrigin: "top",
+  //     duration: 1,
+  //     ease: "expo.out",
+  //   }).call(() => {
+  //     setSelectedImage(imageSrc);
+
+  //     tl.to(".main-image-cover", {
+  //       scaleY: 0,
+  //       transformOrigin: "top",
+  //       duration: 1,
+  //       ease: "expo.out",
+  //     });
+  //   });
+  // };
+
   return (
     <section
       className={`single-item container mx-auto px-6 pb-6 h-screen text-zinc-950 w-full overflow-hidden ${index}`}
@@ -18,12 +40,12 @@ function SingleItem({ image, type, name, index }: SingleItemProps) {
       <div className="inner w-full h-full bg-neutral-50 pt-16 px-6 pb-6 flex flex-col items-center justify-center">
         <div className="content grid grid-cols-2 flex-grow w-full gap-5">
           <div className="image-wrapper w-full h-auto relative overflow-hidden">
-            <div className="image-cover w-full h-full absolute top-0 left-0 z-10 bg-neutral-50 scale-y-0"></div>
+            <div className="image-cover main-image-cover w-full h-full absolute top-0 left-0 z-10 bg-neutral-50 scale-y-0"></div>
             <Image
-              src={`/images/${image}/${image}1.jpg`}
-              alt="swivel chair"
+              src={`/images/${image}/${selectedImage}.jpg`}
+              alt="selected product image"
               fill
-              className="object-cover"
+              className="object-contain"
               sizes="100vw"
             />
           </div>
@@ -43,7 +65,7 @@ function SingleItem({ image, type, name, index }: SingleItemProps) {
               </div>
             </div>
             <div className="images-selection grid grid-rows-3 gap-4">
-              <div className="image-wrapper w-24 h-auto aspect-[1/1.3125] relative ">
+              <div className="image-wrapper w-24 h-auto aspect-[1/1.3125] relative">
                 <div
                   className="image-cover h-full absolute top-0 left-0 z-10 bg-neutral-50 scale-y-0"
                   style={{ width: "calc(100% + 2px)" }}
