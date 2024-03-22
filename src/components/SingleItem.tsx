@@ -61,10 +61,15 @@ function SingleItem() {
   const [currIndex, setCurrIndex] = useState(0);
   const [currItem, setCurrItem] = useState(items[currIndex]);
   const [selectedImage, setSelectedImage] = useState(`${currItem.image}1`);
+  const [switchingImage, setSwitchingImage] = useState(false);
 
   const changeSelectedImage = (imageSrc: string) => {
-    const tl = gsap.timeline();
+    setSwitchingImage(true);
+    if (switchingImage) {
+      return;
+    }
 
+    const tl = gsap.timeline();
     tl.to(
       `.${selectedImage}`,
       {
@@ -103,6 +108,7 @@ function SingleItem() {
           duration: 1,
           ease: "expo.inOut",
         });
+        setSwitchingImage(false);
       });
   };
 
@@ -113,6 +119,7 @@ function SingleItem() {
     const changeItem = (scrollDirection: string) => {
       const transformOrigin = scrollDirection === "down" ? "top" : "bottom";
       const tl = gsap.timeline();
+      const indicatorDelay = scrollDirection === "down" ? 0 : 0.35;
       tl.to(
         `.${selectedImage}`,
         {
@@ -175,6 +182,7 @@ function SingleItem() {
                 transformOrigin: "left",
                 duration: 1,
                 ease: "expo.out",
+                delay: indicatorDelay,
               },
               "<0.25"
             );
