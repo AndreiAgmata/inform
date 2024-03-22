@@ -31,12 +31,56 @@ const items = [
     name: "Andbord",
     index: 3,
   },
+  {
+    image: "gray-chair",
+    type: "Lounge Chair",
+    name: "Silya",
+    index: 4,
+  },
+  {
+    image: "gray-table",
+    type: "Center Table",
+    name: "LaMesa",
+    index: 5,
+  },
+  {
+    image: "gray-lamp",
+    type: "Floor Lamp",
+    name: "Källa",
+    index: 6,
+  },
+  {
+    image: "gray-endTable",
+    type: "End Table",
+    name: "Bilog",
+    index: 7,
+  },
 ];
 
 function SingleItem() {
   const [currIndex, setCurrIndex] = useState(0);
   const [currItem, setCurrItem] = useState(items[currIndex]);
   const [selectedImage, setSelectedImage] = useState(`${currItem.image}1`);
+
+  const changeSelectedImage = (imageSrc: string) => {
+    const tl = gsap.timeline();
+
+    tl.to(".main-image-cover", {
+      scaleY: 1,
+      transformOrigin: "top",
+      duration: 1,
+      ease: "expo.out",
+    }).call(() => {
+      setSelectedImage(imageSrc);
+
+      tl.to(".main-image-cover", {
+        scaleY: 0,
+        transformOrigin: "top",
+        duration: 1,
+        ease: "expo.inOut",
+      });
+    });
+  };
 
   useEffect(() => {
     gsap.registerPlugin(ScrollToPlugin);
@@ -110,7 +154,7 @@ function SingleItem() {
           }
         },
         onDown: () => {
-          if (currIndex !== 3) {
+          if (currIndex !== 7) {
             changeItem("down");
           }
         },
@@ -186,7 +230,7 @@ function SingleItem() {
                   </p>
                 </div>
                 <div className="clip-path">
-                  <p className="p-text font-medium text-8xl overflow-hidden">
+                  <p className="p-text font-medium text-8xl pb-5 overflow-hidden">
                     {currItem.name}
                   </p>
                 </div>
@@ -194,8 +238,8 @@ function SingleItem() {
             </div>
             <div className="images-selection grid grid-rows-3 gap-4">
               <div
-                className="image-wrapper w-24 h-auto aspect-[1/1.3125] relative"
-                onClick={() => setSelectedImage(`${currItem.image}1`)}
+                className="image-wrapper w-24 h-auto aspect-[1/1.3125] relative cursor-pointer"
+                onClick={() => changeSelectedImage(`${currItem.image}1`)}
               >
                 <div
                   className="image-cover h-full absolute top-0 left-0 z-10 bg-neutral-50 scale-y-0"
@@ -210,8 +254,8 @@ function SingleItem() {
                 />
               </div>
               <div
-                className="image-wrapper w-24 h-auto aspect-[1/1.3125] relative overflow-hidden"
-                onClick={() => setSelectedImage(`${currItem.image}2`)}
+                className="image-wrapper w-24 h-auto aspect-[1/1.3125] relative overflow-hidden cursor-pointer"
+                onClick={() => changeSelectedImage(`${currItem.image}2`)}
               >
                 <div
                   className="image-cover h-full absolute top-0 left-0 z-10 bg-neutral-50 scale-y-0"
@@ -226,8 +270,8 @@ function SingleItem() {
                 />
               </div>
               <div
-                className="image-wrapper w-24 h-auto aspect-[1/1.3125] relative overflow-hidden"
-                onClick={() => setSelectedImage(`${currItem.image}3`)}
+                className="image-wrapper w-24 h-auto aspect-[1/1.3125] relative overflow-hidden cursor-pointer"
+                onClick={() => changeSelectedImage(`${currItem.image}3`)}
               >
                 <div
                   className="image-cover h-full absolute top-0 left-0 z-10 bg-neutral-50 scale-y-0"
