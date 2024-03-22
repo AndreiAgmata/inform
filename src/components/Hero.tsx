@@ -72,7 +72,7 @@ function Hero() {
   }, []);
 
   return (
-    <section className="hero container mx-auto flex flex-col items-center justify-start min-h-screen pt-9 sm:pt-10 lg:t-9 xl:pt-7 2xl:pt-5 ">
+    <section className="hero container mx-auto flex flex-col items-center justify-start min-h-screen  pt-9 sm:pt-10 lg:t-9 xl:pt-7 2xl:pt-5 ">
       <div
         className="title w-full px-6 mb-0 sm:mb-2 
       font-semibold italic overflow-hidden flex flex-row items-between justify-between
@@ -90,11 +90,11 @@ function Hero() {
       <div className="featured-hero flex-grow w-full px-6 text-zinc-950 flex">
         <div className="inner flex-grow w-full bg-neutral-50 p-5 flex flex-col items-start justify-start">
           <div className="wrapper w-full">
-            <p className="text-sm tracking-wider font-medium">
+            <p className="text-sm tracking-wider font-medium ">
               Mörk Kollektion
             </p>
             <p className=" text-4xl font-medium">Featured</p>
-            <div className="featured-items w-full flex-grow grid grid-cols-2 xl:grid-cols-4 gap-4 mt-5">
+            <div className="featured-items w-full flex-grow grid grid-cols-2 lg:grid-cols-4 xl:grid-cols-4 gap-4 mt-5">
               <FeaturedItem
                 image="/images/chair/chair1.jpg"
                 type="Lounge Chair"

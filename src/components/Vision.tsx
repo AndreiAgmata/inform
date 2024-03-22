@@ -66,7 +66,7 @@ function Vision() {
       <div className="content h-full bg-neutral-50 p-5 flex flex-col items-start justify-end">
         <div className="featured h-full w-full text-zinc-950 mt-6">
           <div className="inner h-full w-full bg-neutral-50 flex flex-col items-start justify-start">
-            <div className="featured-items w-full flex-grow grid grid-cols-2 xl:grid-cols-4 gap-4 mt-5">
+            <div className="featured-items w-full flex-grow grid grid-cols-2 lg:grid-cols-4 xl:grid-cols-4 gap-4 mt-5">
               <FeaturedItem
                 image="/images/gray-chair/gray-chair1.jpg"
                 type="Lounge Chair"
@@ -91,7 +91,7 @@ function Vision() {
           </div>
         </div>
         <p className="text-lg tracking-wider font-medium">OUR VISION</p>
-        <p className="vision-text font-medium text-2xl sm:text-4xl lg:text-6xl xl:text-7xl sm:pe-24">
+        <p className="vision-text font-medium text-2xl lg:text-4xl xl:text-6xl 2xl:text-7xl xl:pe-24">
           Elegant, timeless pieces for refined residences, enhancing simple
           living areas.
         </p>

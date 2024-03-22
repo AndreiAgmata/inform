@@ -203,13 +203,11 @@ function SingleItem() {
   }, []);
 
   return (
-    <section
-      className={`single-item container mx-auto px-6 pb-6 h-screen text-zinc-950 w-full overflow-hidden`}
-    >
+    <section className="single-item container mx-auto px-6 pb-6 h-screen text-zinc-950 w-full overflow-hidden">
       <div className="inner w-full h-full bg-neutral-50 pt-16 px-6 pb-6 flex flex-col items-center justify-center">
-        <div className="content grid grid-cols-2 flex-grow w-full gap-5">
+        <div className="content flex flex-col lg:grid lg:grid-cols-2 flex-grow w-full gap-5">
           <div
-            className="image-wrapper w-full h-auto relative overflow-hidden"
+            className="image-wrapper w-full h-auto aspect-square md:aspect-[6/5] lg:aspect-auto relative overflow-hidden"
             style={{ backgroundColor: "#EAEAEA" }}
           >
             <div className="image-cover main-image-cover w-full h-full absolute top-0 left-0 z-10 bg-neutral-50 scale-y-0"></div>
@@ -221,8 +219,8 @@ function SingleItem() {
               sizes="100%"
             />
           </div>
-          <div className="product-info flex flex-row items-start justify-between">
-            <div className="details flex flex-col items-start justify-between h-full">
+          <div className="product-info flex flex-col-reverse lg:flex-row lg:items-start lg:justify-between">
+            <div className="details flex flex-col items-start justify-between h-full mt-4 lg:mt-0">
               <div className="mt-auto product-text">
                 <div className="clip-path">
                   <p className="p-text font-medium text-2xl text-zinc-600 overflow-hidden">
@@ -230,13 +228,13 @@ function SingleItem() {
                   </p>
                 </div>
                 <div className="clip-path">
-                  <p className="p-text font-medium text-8xl pb-5 overflow-hidden">
+                  <p className="p-text font-medium text-7xl lg:text-7xl xl:text-8xl pb-5 overflow-hidden">
                     {currItem.name}
                   </p>
                 </div>
               </div>
             </div>
-            <div className="images-selection grid grid-rows-3 gap-4">
+            <div className="images-selection flex flex-row lg:grid lg:grid-rows-3 gap-4">
               <div
                 className="image-wrapper w-24 h-auto aspect-[1/1.3125] relative cursor-pointer"
                 onClick={() => changeSelectedImage(`${currItem.image}1`)}

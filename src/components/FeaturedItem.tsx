@@ -11,7 +11,7 @@ function FeaturedItem({ image, type, name }: FeaturedItemProps) {
   return (
     <div className="featured-item flex flex-col items-start">
       <div
-        className="image-wrapper w-full h-auto aspect-square md:aspect-[2/1.5] lg:aspect-[2/1.1] xl:aspect-[1/1.3125] relative"
+        className="image-wrapper w-full h-auto aspect-square md:aspect-[2/1.35] lg:aspect-[1/2] xl:aspect-[1/1.5] 2xl:aspect-[1/1.1] relative"
         style={{ backgroundColor: "#EAEAEA" }}
       >
         <Image
@@ -19,7 +19,7 @@ function FeaturedItem({ image, type, name }: FeaturedItemProps) {
           alt="swivel chair"
           fill
           sizes="100%"
-          className="object-cover md:object-contain xl:object-cover"
+          className="object-cover md:object-contain xl:object-contain 2xl:object-cover"
         />
       </div>
       <p className="mt-4 font-medium text-xl">{type}</p>

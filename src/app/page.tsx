@@ -10,9 +10,9 @@ export default function Home() {
       <TopBar />
       <Hero />
       <Vision />
-      <div className="spacer w-full h-64 container mx-auto px-6">
+      {/* <div className="spacer w-full h-64 container mx-auto px-6">
         <div className="inner bg-neutral-50 h-full"></div>
-      </div>
+      </div> */}
       <SingleItem />
     </main>
   );
