@@ -11,28 +11,6 @@ interface SingleItemProps {
 }
 
 function SingleItem({ image, type, name, index }: SingleItemProps) {
-  const [selectedImage, setSelectedImage] = useState(`${image}1`);
-
-  // const changeImage = (imageSrc: string) => {
-  //   const tl = gsap.timeline();
-
-  //   tl.to(".main-image-cover", {
-  //     scaleY: 1,
-  //     transformOrigin: "top",
-  //     duration: 1,
-  //     ease: "expo.out",
-  //   }).call(() => {
-  //     setSelectedImage(imageSrc);
-
-  //     tl.to(".main-image-cover", {
-  //       scaleY: 0,
-  //       transformOrigin: "top",
-  //       duration: 1,
-  //       ease: "expo.out",
-  //     });
-  //   });
-  // };
-
   return (
     <section
       className={`single-item container mx-auto px-6 pb-6 h-screen text-zinc-950 w-full overflow-hidden ${index}`}
@@ -42,7 +20,7 @@ function SingleItem({ image, type, name, index }: SingleItemProps) {
           <div className="image-wrapper w-full h-auto relative overflow-hidden">
             <div className="image-cover main-image-cover w-full h-full absolute top-0 left-0 z-10 bg-neutral-50 scale-y-0"></div>
             <Image
-              src={`/images/${image}/${selectedImage}.jpg`}
+              src={`/images/${image}/${image}1.jpg`}
               alt="selected product image"
               fill
               className="object-contain"
