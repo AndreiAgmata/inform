@@ -1,4 +1,5 @@
 import Hero from "@/components/Hero";
+import Preloader from "@/components/Preloader";
 import SingleItem from "@/components/SingleItem";
 
 import TopBar from "@/components/TopBar";
@@ -7,6 +8,7 @@ import Vision from "@/components/Vision";
 export default function Home() {
   return (
     <main className="main">
+      <Preloader />
       <TopBar />
       <Hero />
       <Vision />

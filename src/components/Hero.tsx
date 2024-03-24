@@ -7,6 +7,8 @@ import { ScrollToPlugin } from "gsap/all";
 import { Observer } from "gsap/Observer";
 
 function Hero() {
+  const [action, setAction] = useState("showFeatured");
+
   useEffect(() => {
     gsap.registerPlugin(ScrollToPlugin);
     gsap.registerPlugin(Observer);
@@ -24,20 +26,43 @@ function Hero() {
         });
       },
       onDown: () => {
-        const visionElement = document.querySelector(".vision");
-        if (visionElement) {
-          const visionBottom = visionElement.getBoundingClientRect().bottom;
-          const windowHeight = window.innerHeight;
-          const scrollPosition = visionBottom - windowHeight;
-          gsap.to(window, {
-            duration: 1,
-            ease: "power3.inOut",
-            scrollTo: { y: scrollPosition },
-          });
+        if (action !== "showFeatured") {
+          const visionElement = document.querySelector(".vision");
+          if (visionElement) {
+            const visionBottom = visionElement.getBoundingClientRect().bottom;
+            const windowHeight = window.innerHeight;
+            const scrollPosition = visionBottom - windowHeight;
+            gsap.to(window, {
+              duration: 1,
+              ease: "power3.inOut",
+              scrollTo: { y: scrollPosition },
+            });
+          }
+        } else {
+          console.log("here");
+          const tl = gsap.timeline();
+          tl.to(".featured-hero .inner", {
+            yPercent: -100,
+            duration: 2,
+            ease: "expo.out",
+          })
+            .to(
+              ".featured-hero .inner > *",
+              {
+                yPercent: -100,
+                duration: 2,
+                ease: "expo.out",
+              },
+              "<0.25"
+            )
+            .call(() => {
+              console.log("show finsihed");
+              setAction("showNextPage");
+            });
         }
       },
     });
-  }, []);
+  }, [action]);
 
   useEffect(() => {
     const ctx = gsap.context(() => {
@@ -46,25 +71,25 @@ function Hero() {
       tl.fromTo(
         ".title-letter",
         { yPercent: 110 },
-        { yPercent: 0, duration: 1.5, ease: "expo.out", stagger: 0.15 }
+        {
+          yPercent: 0,
+          opacity: 1,
+          duration: 1.5,
+          ease: "expo.out",
+          stagger: 0.15,
+          delay: 1.75,
+        }
       )
         .fromTo(
           ".title-apos",
           { yPercent: -110 },
-          { yPercent: 0, duration: 1.5, ease: "expo.out" },
+          { duration: 1.5, ease: "expo.out" },
           "<0.15"
         )
         .fromTo(
-          ".featured-hero .inner",
-          { yPercent: 100 },
-          { yPercent: 0, duration: 2, ease: "expo.out" },
-          "<0.5"
-        )
-        .fromTo(
-          ".featured-hero .inner > *",
-          { yPercent: 100 },
-          { yPercent: 0, duration: 2, ease: "expo.out" },
-          "<0.15"
+          ".action-desc",
+          { opacity: 0 },
+          { opacity: 1, duration: 1, ease: "expo.in" }
         );
     });
 
@@ -87,9 +112,12 @@ function Hero() {
         <p className="title-letter">R</p>
         <p className="title-letter">M</p>
       </div>
+      <div className="action-desc absolute bottom-12">
+        <p className="font-medium underline text-xl">SCROLL DOWN</p>
+      </div>
       <div className="featured-hero flex-grow w-full px-6 text-zinc-950 flex">
-        <div className="inner flex-grow w-full bg-neutral-50 p-5 flex flex-col items-start justify-start">
-          <div className="wrapper w-full">
+        <div className="inner flex-grow w-full bg-neutral-50 p-5 flex flex-col items-start justify-start translate-y-full">
+          <div className="wrapper w-full translate-y-full">
             <p className="text-sm tracking-wider font-medium ">
               Mörk Kollektion
             </p>

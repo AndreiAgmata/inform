@@ -237,7 +237,7 @@ function SingleItem() {
           transformOrigin: "top",
           duration: 1,
           ease: "expo.in",
-          delay: 0.5,
+          delay: 0.15,
         }
       )
         .fromTo(
