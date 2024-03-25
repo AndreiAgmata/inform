@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect } from "react";
+import React, { Dispatch, SetStateAction, useEffect } from "react";
 
 import gsap from "gsap";
 import ScrollTrigger from "gsap/ScrollTrigger";
@@ -8,7 +8,11 @@ import { Observer } from "gsap/Observer";
 import FeaturedItem from "./FeaturedItem";
 import SplitType from "split-type";
 
-function Vision() {
+interface visionProps {
+  setCurrentPage: Dispatch<SetStateAction<number>>;
+}
+
+function Vision({ setCurrentPage }: visionProps) {
   useEffect(() => {
     gsap.registerPlugin(ScrollToPlugin);
     gsap.registerPlugin(Observer);
@@ -17,20 +21,25 @@ function Vision() {
       target: ".vision",
       type: "wheel, touch",
       preventDefault: true,
-      onUp: () =>
+      onUp: () => {
         gsap.to(window, {
           duration: 1,
           ease: "power3.inOut",
           scrollTo: ".hero",
-        }),
-      onDown: () =>
+        });
+        setCurrentPage(1);
+      },
+
+      onDown: () => {
         gsap.to(window, {
           duration: 1,
           ease: "power3.inOut",
           scrollTo: ".single-item",
-        }),
+        });
+        setCurrentPage(3);
+      },
     });
-  }, []);
+  }, [setCurrentPage]);
 
   useEffect(() => {
     const text = new SplitType(".vision-text");

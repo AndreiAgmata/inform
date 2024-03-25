@@ -1,12 +1,16 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React, { Dispatch, SetStateAction, useEffect, useState } from "react";
 import FeaturedItem from "./FeaturedItem";
 
 import gsap from "gsap";
 import { ScrollToPlugin } from "gsap/all";
 import { Observer } from "gsap/Observer";
 
-function Hero() {
+interface heroProps {
+  setCurrentPage: Dispatch<SetStateAction<number>>;
+}
+
+function Hero({ setCurrentPage }: heroProps) {
   const [action, setAction] = useState("showFeatured");
 
   useEffect(() => {
@@ -37,6 +41,7 @@ function Hero() {
               ease: "power3.inOut",
               scrollTo: { y: scrollPosition },
             });
+            setCurrentPage(2);
           }
         } else {
           console.log("here");
@@ -77,7 +82,7 @@ function Hero() {
           duration: 1.5,
           ease: "expo.out",
           stagger: 0.15,
-          delay: 1.75,
+          delay: 0.75,
         }
       )
         .fromTo(
@@ -89,7 +94,8 @@ function Hero() {
         .fromTo(
           ".action-desc",
           { opacity: 0 },
-          { opacity: 1, duration: 1, ease: "expo.in" }
+          { opacity: 1, duration: 1, ease: "expo.in" },
+          "<0.5"
         );
     });
 

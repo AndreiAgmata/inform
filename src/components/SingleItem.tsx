@@ -1,10 +1,15 @@
 "use client";
 import Image from "next/image";
-import React, { useEffect, useState } from "react";
+import React, { Dispatch, SetStateAction, useEffect, useState } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { ScrollToPlugin } from "gsap/all";
 import { Observer } from "gsap/Observer";
+
+interface singleItemProps {
+  currentPage: number;
+  setCurrentPage: Dispatch<SetStateAction<number>>;
+}
 
 const items = [
   {
@@ -57,11 +62,12 @@ const items = [
   },
 ];
 
-function SingleItem() {
+function SingleItem({ currentPage, setCurrentPage }: singleItemProps) {
   const [currIndex, setCurrIndex] = useState(0);
   const [currItem, setCurrItem] = useState(items[currIndex]);
   const [selectedImage, setSelectedImage] = useState(`${currItem.image}1`);
   const [switchingImage, setSwitchingImage] = useState(false);
+  const [switchingItem, setSwitchingItem] = useState(false);
 
   const changeSelectedImage = (imageSrc: string) => {
     setSwitchingImage(true);
@@ -185,7 +191,8 @@ function SingleItem() {
                 delay: indicatorDelay,
               },
               "<0.25"
-            );
+            )
+            .call(() => setSwitchingItem(false));
         });
     };
 
@@ -195,26 +202,36 @@ function SingleItem() {
         type: "wheel, touch",
         preventDefault: true,
         onUp: () => {
-          if (currIndex !== 0) {
-            changeItem("up");
-          } else {
-            gsap.to(window, {
-              duration: 1,
-              ease: "power3.inOut",
-              scrollTo: ".vision",
-            });
+          if (!switchingItem) {
+            setSwitchingItem(true);
+            if (currIndex !== 0) {
+              changeItem("up");
+              setCurrentPage(currentPage - 1);
+            } else {
+              gsap.to(window, {
+                duration: 1,
+                ease: "power3.inOut",
+                scrollTo: ".vision",
+              });
+              setCurrentPage(2);
+              setSwitchingItem(false);
+            }
           }
         },
         onDown: () => {
-          if (currIndex !== 7) {
-            changeItem("down");
+          if (!switchingItem) {
+            setSwitchingItem(true);
+            if (currIndex !== 7) {
+              setCurrentPage(currentPage + 1);
+              changeItem("down");
+            }
           }
         },
       });
     });
 
     return () => ctx.revert();
-  }, [currIndex, selectedImage]);
+  }, [currIndex, selectedImage, switchingItem, currentPage, setCurrentPage]);
 
   //startup animation
   useEffect(() => {
